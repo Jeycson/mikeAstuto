@@ -1,0 +1,35 @@
+---
+import MainLayout from "./MainLayout.astro";
+import Sidebar from "../components/navigation/Sidebar.astro";
+
+const { moduleSlug, lessonSlug } = Astro.props;
+---
+
+<MainLayout>
+  <div class="drawer lg:drawer-open min-h-screen">
+    <input id="lesson-drawer" type="checkbox" class="drawer-toggle" />
+
+    <!-- CONTENIDO -->
+    <main class="drawer-content flex justify-center px-4 py-6">
+      <div class="w-full max-w-4xl">
+        <label
+          for="lesson-drawer"
+          class="btn btn-sm btn-outline lg:hidden mb-4"
+        >
+          ☰ Contenido
+        </label>
+
+        <slot />
+      </div>
+    </main>
+
+    <!-- SIDEBAR -->
+    <aside class="drawer-side">
+      <label for="lesson-drawer" class="drawer-overlay"></label>
+      <Sidebar
+        moduleSlug={moduleSlug}
+        lessonSlug={lessonSlug}
+      />
+    </aside>
+  </div>
+</MainLayout>

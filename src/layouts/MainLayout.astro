@@ -1,0 +1,47 @@
+---
+import Sidebar from "../components/navigation/Sidebar.astro";
+---
+
+<html lang="es" data-theme="corporate" transition:name="page">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet" href="/src/styles/global.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono&display=swap"
+    rel="stylesheet"
+    />
+
+    <title>Mi-K</title>
+  </head>
+
+  <div class="drawer lg:drawer-open min-h-screen bg-base-100">
+    <input id="site-drawer" type="checkbox" class="drawer-toggle" />
+
+    <!-- CONTENIDO -->
+    <div class="drawer-content flex flex-col">
+      <!-- Topbar -->
+      <header class="navbar bg-base-200 px-4">
+        <label for="site-drawer" class="btn btn-ghost lg:hidden">
+          ☰
+        </label>
+        <span class="text-lg font-bold">Aprende Estadística</span>
+      </header>
+
+      <!-- Página -->
+      <main class="flex justify-center px-4 py-6">
+        <div class="w-full max-w-4xl">
+          <slot />
+        </div>
+      </main>
+    </div>
+
+    <!-- SIDEBAR -->
+    <aside class="drawer-side">
+      <label for="site-drawer" class="drawer-overlay"></label>
+      <Sidebar />
+    </aside>
+  </div>
+</html>

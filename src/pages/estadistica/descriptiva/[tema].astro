@@ -1,0 +1,45 @@
+---
+import MainLayout from "../../../layouts/MainLayout.astro";
+import LessonTabs from "../../../components/lesson/LessonTabs.astro";
+import ExplanationCard from "../../../components/lesson/ExplanationCard.astro";
+import ExerciseCard from "../../../components/lesson/ExerciseCard.astro";
+import DataInputCard from "../../../components/lesson/DataInputCard.astro";
+import { getCollection } from "astro:content";
+
+export async function getStaticPaths() {
+  const lessons = await getCollection("descriptiva");
+
+  return lessons.map((lesson) => ({
+    params: { tema: lesson.slug },
+    props: { lesson },
+  }));
+}
+
+const { lesson } = Astro.props;
+const { Content } = await lesson.render();
+
+// tab activo
+const tab = Astro.url.searchParams.get("tab") ?? "theory";
+---
+
+<MainLayout>
+  <article class="prose max-w-none">
+    <h1>{lesson.data.title}</h1>
+
+    <LessonTabs active={tab} />
+
+    {tab === "theory" && (
+      <ExplanationCard>
+        <Content />
+      </ExplanationCard>
+    )}
+
+    {tab === "exercises" && (
+      <ExerciseCard lesson={lesson} />
+    )}
+
+    {tab === "practice" && (
+      <DataInputCard lesson={lesson} />
+    )}
+  </article>
+</MainLayout>

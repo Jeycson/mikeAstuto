@@ -1,0 +1,54 @@
+@import "tailwindcss";
+@plugin "daisyui";
+
+:root {
+  font-family: 'Inter', system-ui, sans-serif;
+}
+
+code, pre {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.prose {
+  max-width: 100%;
+}
+
+.prose h2 {
+  margin-top: 2rem;
+}
+
+::view-transition-old(lesson),
+::view-transition-new(lesson) {
+  animation-duration: 250ms;
+  animation-timing-function: ease-in-out;
+}
+
+::view-transition-old(lesson) {
+  animation-name: fade-out;
+}
+
+::view-transition-new(lesson) {
+  animation-name: fade-in;
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

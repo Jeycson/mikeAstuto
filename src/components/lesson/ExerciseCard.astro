@@ -1,0 +1,9 @@
+---
+const { lesson } = Astro.props;
+---
+<div class="card bg-base-100 shadow">
+  <div class="card-body">
+    <h2 class="card-title">Ejercicios</h2>
+    <p>Ejercicios para: <strong>{lesson.data.title}</strong></p>
+  </div>
+</div>

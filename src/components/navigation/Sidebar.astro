@@ -1,0 +1,50 @@
+---
+import { getCollection } from "astro:content";
+
+const pathname = Astro.url.pathname.split("/").filter(Boolean);
+// ["estadistica", "descriptiva", "media"]
+
+const activeModule = pathname[1];
+const activeLesson = pathname[2];
+
+// Lista de módulos del sitio
+const modules = ["descriptiva", "probabilidad"];
+
+const collections = await Promise.all(
+  modules.map(async (mod) => ({
+    name: mod,
+    lessons: await getCollection(mod),
+  }))
+);
+---
+
+<div class="w-72 bg-base-200 p-4 overflow-y-auto">
+  <h2 class="text-lg font-bold mb-4">📚 Contenido</h2>
+
+  <ul class="menu menu-sm">
+    {collections.map(({ name, lessons }) => (
+      <li>
+        <details open={name === activeModule}>
+          <summary class="capitalize">
+            {name}
+          </summary>
+
+          <ul>
+            {lessons
+              .sort((a, b) => a.data.order - b.data.order)
+              .map((lesson) => (
+                <li>
+                  <a
+                    href={`/estadistica/${name}/${lesson.slug}`}
+                    class={lesson.slug === activeLesson ? "active" : ""}
+                  >
+                    {lesson.data.title}
+                  </a>
+                </li>
+              ))}
+          </ul>
+        </details>
+      </li>
+    ))}
+  </ul>
+</div>

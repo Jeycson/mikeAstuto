@@ -1,0 +1,8 @@
+---
+const { value = 0 } = Astro.props;
+---
+
+<div class="mb-6">
+  <p class="text-sm mb-1">Progreso del tema</p>
+  <progress class="progress progress-success w-full" value={value} max="100"></progress>
+</div>

@@ -1,0 +1,17 @@
+---
+const { title, breadcrumb = [] } = Astro.props;
+---
+
+<div class="mb-6">
+  <div class="text-sm breadcrumbs">
+    <ul>
+      {breadcrumb.map(item => (
+        <li>{item}</li>
+      ))}
+    </ul>
+  </div>
+
+  <h1 class="text-3xl font-bold mt-2">
+    {title}
+  </h1>
+</div>

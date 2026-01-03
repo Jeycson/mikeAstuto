@@ -1,0 +1,29 @@
+---
+const { active = "theory" } = Astro.props;
+---
+
+<div role="tablist" class="tabs tabs-bordered mb-6">
+  <a
+    role="tab"
+    class={`tab ${active === "theory" ? "tab-active" : ""}`}
+    href="?tab=theory"
+  >
+    📘 Teoría
+  </a>
+
+  <a
+    role="tab"
+    class={`tab ${active === "exercises" ? "tab-active" : ""}`}
+    href="?tab=exercises"
+  >
+    ✏️ Ejercicios
+  </a>
+
+  <a
+    role="tab"
+    class={`tab ${active === "practice" ? "tab-active" : ""}`}
+    href="?tab=practice"
+  >
+    📊 Práctica
+  </a>
+</div>
